@@ -7,7 +7,13 @@ class DotCamera {
     constructor(glsl, gui) {
         this.tmp = glsl({},{size:[1,1], tag:'tmp'}); // placeholder
         this.field = this.tmp;
-        
+        var CONSTRAINTS = {
+         video: {facingMode: environment} // どのカメラを利用するか
+
+    // facingModeには最終的に以下のいずれかの値を入れる
+    //   facingMode: "user"                    // フロントカメラを利用する
+    //   facingMode: { exact: "environment" }  // リアカメラを利用する
+        };
         this.video = document.createElement('video');
         navigator.mediaDevices.getUserMedia({ video: true })
           .then((stream) => {
